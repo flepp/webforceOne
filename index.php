@@ -5,10 +5,6 @@
 	<title>WEBFORCE ONE</title>
 </head>
 <body>
-<h1>Michel was here</h1>
-<h1>Paulioa</h1>
-
-	<p>Philippe was here</p>
-
+<h1>DEV BRANCH</h1>
 </body>
 </html>
