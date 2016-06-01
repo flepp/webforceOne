@@ -1,0 +1,32 @@
+Deroulement du projet 
+
+creation fichiers repertoires
+
+films_db
+      |--- index.php (home)    Ibrahima
+      |--- add.php        Philippe
+      |--- update.php        Michel
+      |--- category.php        Paul
+      |--- movie_catalog.php    Philippe
+      |--- movie_single.php    Michel
+      |--- search.php        Ibrahima
+      |--- pagination.php (=> catalog_view.php)    First to finish
+      |--- inc/
+             |--- db.php
+            |--- add_view.php        Philippe
+            |--- update_view.php        Michel
+             |--- category_view.php     Paul
+             |--- movie_catalog_view.php  (filtre, tri) Philippe
+             |--- movie_single_view.php  Michel
+             |--- search_view.php        Ibrahima
+             |--- header.php      Paul
+             |--- footer.php         Paul
+     |--- css
+     |--- img
+     |--- js
+
+repartition des taches + estimations
+TACHES PAULI: 
+-     
+mettre tout sur github => creer fichier test à modifier
+
