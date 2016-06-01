@@ -1,0 +1,17 @@
+- créer fichiers & répertoires
+- répartir les tâches
+
+- remplir des lignes tests en DB
+
+- analyser le fonctionnement de l'API IMDb
+- écrire le code HTML/CSS (toutes pages ou page par page)
+
+- coder le CRUD d'un film (page 6)
+- coder l'ajout/modification (CRU) d'une catégorie (page 5)
+- coder le tri, les filtres & la pagination du catalogue
+- coder la page catalogue (page 3)
+- coder la recherche (header + home + catalogue)
+- coder les fonctions retournant les infos de la DB
+- coder la page détails d'un film (page 4)
+- coder la home (page 2)
+- bien commenter & indenter son code
