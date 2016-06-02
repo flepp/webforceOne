@@ -1,9 +1,8 @@
-<?php 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WEBFORCE ONE</title>
+</head>
+<body>
 
-	try {
-		$dsn = 'mysql:dbname=DBB;host=localhost;';
-		$pdo = new PDO($dsn, 'pseudo', 'pass');
-	} catch (Exception $e) {
-		echo 'Error: ' $e->getmessage();
-	}
- ?>
