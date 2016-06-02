@@ -109,7 +109,7 @@ if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['a
 	$stmt->bindValue(':stosearch', '%'.$stoSearch.'%');
 	$stmt->bindValue(':datesearch', '%'.$dateSearch.'%');
 	if($stmt->execute() === false){
-		print_r($stmt->errorInfo());
+		print_r($pdo->errorInfo());
 	}
 	else if($stmt->rowCount() > 0){
 		$searchList = $stmt->fetchAll();
