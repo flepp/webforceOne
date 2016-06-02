@@ -1,6 +1,5 @@
 <?php 
 	require 'inc/db.php';
- 	require 'inc/header.php';
 
 	$sql = '
 		SELECT 
@@ -89,7 +88,7 @@
 						:cast,
 						:synopsis,
 						:path,
-						NOW()
+						NOW(),
 						NOW()
 					)
 				'
@@ -97,14 +96,13 @@
 			;
 
 			$pdoStatement = $pdo->prepare($sqlIns);
-			$pdoStatement->bindValue(':name', $nom);
-			$pdoStatement->bindValue(':firstName', $prenom);
-			$pdoStatement->bindValue(':mail', $mail);
-			$pdoStatement->bindValue(':birth', $naissance);
-			$pdoStatement->bindValue(':city', $ville);
-			$pdoStatement->bindValue(':country', $countryID);
-			$pdoStatement->bindValue(':status', $maritalID);
-			$pdoStatement->bindValue(':sesID', $maritalID);
+			$pdoStatement->bindValue(':title', $title);
+			$pdoStatement->bindValue(':ogTitle', $ogTitle);
+			$pdoStatement->bindValue(':cast', $cast);
+			$pdoStatement->bindValue(':synopsis', $synopsis);
+			$pdoStatement->bindValue(':path', $chemin);
+
+
 
 			if($pdoStatement->execute() === false){
 
@@ -113,7 +111,7 @@
 
 			else if ($pdoStatement->rowCount() > 0){
 
-				echo 'Etudiant ajouté à la base de données !';
+				echo 'Film ajouté à la base de données !';
 	
 			}
 		}
@@ -122,9 +120,8 @@
 
 	}
 
- ?>
-
-<?php
+ 	require 'inc/header.php';
+ 	require 'inc/menu.php';
 	require 'inc/add_view.php';
  	require 'inc/footer.php';
 ?>
