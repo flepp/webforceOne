@@ -1,9 +1,16 @@
-<?php 
-
-	try {
-		$dsn = 'mysql:dbname=DBB;host=localhost;';
-		$pdo = new PDO($dsn, 'pseudo', 'pass');
-	} catch (Exception $e) {
-		echo 'Error: ' $e->getmessage();
-	}
- ?>
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>WEBFORCE ONE</title>
+	</head>
+	
+	<nav>
+		<a href="index.php">Home</a>
+		<a href="category.php">Categories</a>
+		<a href="addUpdate.php">Add movies</a>
+	</nav>
+	
+	<body>
