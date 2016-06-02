@@ -1,6 +1,16 @@
 <?php 
 	require 'inc/db.php';
 
+	$storageList = array(
+		
+		1 => 'USB'
+	);
+
+	$categoryList = array(
+		
+		1 => 'Science Fiction'
+	);
+
 	$sql = '
 		SELECT 
 			mov_id,
@@ -9,6 +19,7 @@
 			mov_cast,
 			mov_synopsis,
 			mov_path,
+			mov_image,
 			mov_date_creation,
 			mov_date_update 	
 		FROM 
@@ -32,34 +43,36 @@
 		$titreOg = isset($_POST['movieOgTitle']) ? $_POST['movieOgTitle'] : '';
 		$cast = isset($_POST['movieCast']) ? $_POST['movieCast'] : '';
 		$resume = isset($_POST['movieSynopsis']) ? $_POST['movieSynopsis'] : '';
-		$chemin = isset($_POST['moviePath']) ? intval($_POST['moviePath']) : '';
-		$image = isset($_POST['movieImg']) ? intval($_POST['movieImg']) : '';
+		$chemin = isset($_POST['moviePath']) ? $_POST['moviePath'] : '';
+		$image = isset($_POST['movieImg']) ? $_POST['movieImg'] : '';
+		$storage = isset($_POST['storage']) ? $_POST['storage'] : '';
+		$category = isset($_POST['category']) ? $_POST['category'] : '';
 
 
 		if (empty($titre)) {
-			$errorList[] = 'Le nom est vide';
+			$errorList[] = 'Le titre est vide';
 		}
 		if (empty($titreOg)) {
-			$errorList[] = 'Le prénom est vide';
+			$errorList[] = 'Le titre original est vide';
 		}
 		if (empty($cast)) {
-			$errorList[] = 'L\'email est vide';
+			$errorList[] = 'Le cast est vide';
 		}
 		if (empty($resume)) {
-			$errorList[] = 'La date de naissance est vide';
+			$errorList[] = 'Le resumé est vide';
 		}
 		if (empty($chemin)) {
-			$errorList[] = 'La ville est manquante';
+			$errorList[] = 'Le chemin n\'est pas spécifié';
 		}
 		if (empty($image)) {
-			$errorList[] = 'La nationalité est manquante';
+			$errorList[] = 'Il n\'y a pas d\'image';
 		}
-		if (empty($creation)) {
-			$errorList[] = 'Le statut est manquant';
+		/*if (empty($creation)) {
+			$errorList[] = 'La date de création est vide';
 		}
 		if (empty($maj)) {
-			$errorList[] = 'Le statut est manquant';
-		}
+			$errorList[] = 'La date de modification est vide';
+		}*/
 		
 
 		if (empty($errorList)) {
@@ -77,8 +90,11 @@
 						mov_cast,
 						mov_synopsis,
 						mov_path,
+						mov_image,
 						mov_date_creation,
-						mov_date_update 	
+						mov_date_update,
+						sto_id,
+						cat_id	
 
 					)
 					VALUES
@@ -88,19 +104,25 @@
 						:cast,
 						:synopsis,
 						:path,
+						:image,
 						NOW(),
-						NOW()
+						NOW(),
+						:storage,
+						:category
 					)
 				'
 
 			;
 
 			$pdoStatement = $pdo->prepare($sqlIns);
-			$pdoStatement->bindValue(':title', $title);
-			$pdoStatement->bindValue(':ogTitle', $ogTitle);
+			$pdoStatement->bindValue(':title', $titre);
+			$pdoStatement->bindValue(':ogTitle', $titreOg);
 			$pdoStatement->bindValue(':cast', $cast);
-			$pdoStatement->bindValue(':synopsis', $synopsis);
+			$pdoStatement->bindValue(':synopsis', $resume);
 			$pdoStatement->bindValue(':path', $chemin);
+			$pdoStatement->bindValue(':image', $image);
+			$pdoStatement->bindValue(':storage', $storage);
+			$pdoStatement->bindValue(':category', $category);
 
 
 
