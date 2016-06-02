@@ -1,16 +1,19 @@
-
 <?php
+
 	require 'inc/db.php';
+
+	$movieList = array();
 
 	$nbPerPage = 4;
 	$currentOff = 0;
 	$currentPage = 1;
-
+	
 	if (array_key_exists('page', $_GET)) { // équivaut à isset($_GET['page'])
 
 		$currentPage = intval($_GET['page']);
 		$currentOff = ($currentPage-1) * $nbPerPage;
 	}
+
 
 	$sql = '
 			SELECT 
@@ -29,26 +32,35 @@
 			category ON category.cat_id = movie.cat_id
 		LEFT OUTER JOIN
 			storage ON storage.sto_id = movie.sto_id
-		LIMIT
-			:offset,:nbPerPage
+
 		'
 		;
 
+		$dateMaj = isset($_GET['tri_date']) ? $_GET['tri_date'] : '';
+
+		if (!empty($dateMaj)) {
+			
+			$sql .= " ORDER BY mov_date_update ".$dateMaj;
+
+		}
+
+		$sql.=' LIMIT :offset,:nbPerPage';
+
 		$pdoStatement = $pdo->prepare($sql);
 		
-		$pdoStatement->bindValue(':nbPerPage',$nbPerPage, PDO::PARAM_INT);
-
 		$pdoStatement->bindValue(':offset', $currentOff, PDO::PARAM_INT);
+		$pdoStatement->bindValue(':nbPerPage',$nbPerPage, PDO::PARAM_INT);
 
 		if($pdoStatement->execute() === false){
 
-			print_r($pdo->errorInfo());
+			print_r($pdoStatement->errorInfo());
 		}
 
 		else if ($pdoStatement->rowCount() > 0){
 
 			$movieList = $pdoStatement->fetchAll();
 		}
+
 	
  	require 'inc/header.php';
  	require 'inc/menu.php';
