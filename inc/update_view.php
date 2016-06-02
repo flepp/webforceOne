@@ -1,7 +1,6 @@
 <?php
 
 require 'header.php';
-require 'footer.php';
 
 ?>
 <form action="" method="post">
@@ -14,4 +13,8 @@ require 'footer.php';
 		<input type="submit" value="Valider">
 	</fieldset>
 </form>
+<?php
 
+require 'footer.php';
+
+?>

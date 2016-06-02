@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Update Movie</title>
-	<meta charset="utf-8">
-</head>
-<body>
-	<pre>
+
 <?php
 require 'inc/db.php';
-require 'update_view.php';
+require 'inc/update_view.php';
 
+
+$errorList = array();
+//premiere methode
 if (!empty($_GET['mov_id'])) {
-	$Title = $_GET['mov_id'];
+	$movieId = $_GET['mov_id'];
 
 	$sql = '
 	SELECT mov_title
@@ -19,8 +15,18 @@ if (!empty($_GET['mov_id'])) {
 	WHERE mov_id = :movieId
 	';
 	$movieEdit = $pdo->prepare($sql);
+	$movieEdit->bindValue(':movieId',$movieId);
 	$movieEdit->execute();
-	$movieEdit->fetchAll();
+
+	if (empty($movieEdit)) {
+		$errorList[] = 'Pas de film!';
+	}
+	$movieSelect = $movieEdit->fetchAll();
+
+	print_r($movieSelect);
+	exit;
+	
+/*****************/
 
 	// Si le formulaire a été soumis
 	if (!empty($_POST)) {
@@ -49,75 +55,4 @@ if (!empty($_GET['mov_id'])) {
 	}
 }
 
-/*********************/
-
-// Je récupère le token spécifié dans l'URL
-
-	if (!empty($_GET['mov_id'])) {
-	$Title = $_GET['mov_id'];
-
-	$sql = '
-	SELECT mov_title
-	FROM movie
-	WHERE mov_id = :movieId
-	';
-	$stmt = $pdo->prepare($sql);
-	$stmt->bindValue(':token', $token);
-
-	if ($stmt->execute()) {
-		if ($stmt->rowCount() > 0) {
-			// Formulaire soumis
-			if (!empty($_POST)) {
-				print_r($_POST);
-				$password = isset($_POST['passwordToto']) ? trim($_POST['passwordToto']) : '';
-				$password2 = isset($_POST['passwordToto2']) ? trim($_POST['passwordToto2']) : '';
-
-				if (!empty($password)) {
-					if ($password == $password2) {
-						// Je récupère l'id
-						$userInfos = $stmt->fetch();
-
-						$sql = '
-							UPDATE user
-							SET usr_password = :password,
-							usr_token = ""
-							WHERE usr_id = :id
-						';
-						$stmt = $pdo->prepare($sql);
-						$stmt->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
-						$stmt->bindValue(':id', $userInfos['usr_id']);
-						$stmt->execute();
-
-						echo 'votre mot de passe a été modifié<br>';
-					}
-					else {
-						echo 'Vos mots de passe sont différents<br>';
-					}
-				}
-				else {
-					echo 'mot de passe vide<br>';
-				}
-			}
-			?>
-
-	<form method="post" action="">
-	<fieldset>
-		<legend>User password change</legend>
-		<input type="password" name="passwordToto" placeholder="Your password" value=""><br>
-		<input type="password" name="passwordToto2" placeholder="Confirm your password" value=""><br>
-		<input type="submit" value="Change">
-	</fieldset>
-	</form>
-			<?php
-		}
-		else {
-			echo 'Votre lien n\'est plus valable<br>';
-		}
-	}
-}
-else {
-	// Redirection
-	header('Location: login.php');
-	exit;
-}
 ?>
