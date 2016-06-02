@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>WEBFORCE ONE</title>
-</head>
-<body>
-<h1>DEV BRANCH</h1>
-</body>
-</html>
+<?php 
+	require 'inc/db.php';
+
+
+	
+ 	require 'inc/header.php';
+ 	require 'inc/menu.php';
+ 	require 'inc/footer.php';
+?>
