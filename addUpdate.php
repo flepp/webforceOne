@@ -1,6 +1,8 @@
 <?php 
 	require 'inc/db.php';
 
+	$movieList = array();
+
 	$storageList = array(
 		
 		1 => 'USB'
