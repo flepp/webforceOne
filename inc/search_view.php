@@ -1,11 +1,39 @@
 <?php if($formTwoValid === true) : ?>
-	<p>Voici le résultat trouvé !</p>
+
+	<?php if(isset($searchList3) && sizeof($searchList3) > 0) : ?>
+		<table border="1">
+			<thead>
+				<tr>
+					<td> Titre</td>
+					<td> Titre Original</td>
+					<td> Genre</td>
+					<td> Synopsis</td>
+					<td> Couverture</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php foreach($searchList3 as $currentSearch) : ?>
+					<tr>
+						<td><a href="movie_single_view.php?mov_id=<?= $currentSearch['mov_id']?>"><?= $currentSearch['mov_title'] ?></a></td>
+						<td><?= $currentSearch['mov_original_title'] ?></td>
+						<td><?= $currentSearch['cat_name'] ?></td>
+						<td><?= $currentSearch['mov_synopsis'] ?></td>
+						<td><img style="height: 100px" src="<?= $currentSearch['mov_image'] ?>"></td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+
+	<?php else :?>
+	<p>Aucun film trouvé</p>
+	<?php endif; ?>
 <?php else :?>
 	<?php if(!empty($_GET['search'])) ?>
 		<?php if(!isset($nbRows)) : ?>
-			<p>Voici le résultat de votre recherche "<?= $search ?>", il y a 0 élément trouvé !</p>
+			<p>Voici le résultat de votre recherche "<?= isset($search) ?>", il y a 0 élément trouvé !</p>
 		<?php else: ?>
-			<p>Voici le résultat de votre recherche "<?= $search ?>", il y a <?= $nbRows ?> élément(s) trouvé(s) !</p>
+			<p>Voici le résultat de votre recherche "<?= isset($search) ?>", il y a <?= $nbRows ?> élément(s) trouvé(s) !</p>
 		<?php endif; ?>
 
 	<?php if(isset($searchList) && sizeof($searchList) > 0) : ?>
@@ -34,7 +62,7 @@
 		</table>
 
 	<?php else :?>
-	aucun film
+	<p>Aucun film trouvé</p>
 	<?php endif; ?>
 <?php endif; ?>
 <br/>
