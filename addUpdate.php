@@ -3,7 +3,7 @@
 
 	$movieList = array();
 
-	$storageList = array(
+	/*$storageList = array(
 		
 		1 => 'USB'
 	);
@@ -11,7 +11,34 @@
 	$categoryList = array(
 		
 		1 => 'Science Fiction'
-	);
+	);*/
+
+	$catArray = array();
+
+	$sqlCat = '
+
+		SELECT
+			cat_name
+		FROM
+			category
+		INNER JOIN
+			movie ON movie.cat_id = category.cat_id
+	'
+	;
+
+	$catStmt = $pdo->query($sqlCat);
+
+	if ($catStmt === false) {
+
+		print_r($pdo->errorInfo());
+	}
+
+	else {
+
+		//echo 'Categories Selected';
+		//print_r($catStmt->fetch());
+		$catArray = $catStmt->fetch();
+	}
 
 	$sql = '
 		SELECT 

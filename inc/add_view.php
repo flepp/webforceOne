@@ -18,7 +18,7 @@
 		Catégorie :<br />
 		<select name="category">
 			<option value="0">choisissez :</option>
-			<?php foreach ($categoryList as $key=>$value) :?>
+			<?php foreach ($catArray as $key=>$value) :?>
 				<option value="<?= $key ?>"><?= $value ?></option>
 			<?php endforeach; ?>
 		</select><br />
