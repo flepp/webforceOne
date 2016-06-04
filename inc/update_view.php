@@ -3,11 +3,15 @@
 	<fieldset>
 		<legend>Modifier les infos du film</legend>
 		<input type="text" name="mov_title" value="<?= $movieSelect['mov_title'] ?>"/><br />
-		<select name="selection">
-	    <option selected="selected"><?= $movieSelect['cat_name']?></option>
-	    <option value="<?= $movieSelect['cat_id']?>"><?= $movieSelect['cat_name']?></option>
+
+		<select name="cat_id">
+		    <?php foreach ($catSelect as $value) :?>
+		    <option value="<?= $value['cat_id']?>">
+		    	<?= $value['cat_name']?>
+		    </option>
+		    <?php endforeach; ?>
 		</select><br />
-		<!--<input type="text" name="cat_id" value="<?= $movieSelect['cat_name']?>"/><br />-->
+
 		<input type="text" name="mov_cast" value="<?= $movieSelect['mov_cast'] ?>"/><br />
 		<input type="text" name="mov_synopsis" value="<?= $movieSelect['mov_synopsis'] ?>"/><br />
 		<input type="text" name="mov_path" value="<?= $movieSelect['mov_path']?>"/><br />

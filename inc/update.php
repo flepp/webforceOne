@@ -3,29 +3,44 @@
 require 'db.php';
 
 $movieSelect = array();
+$catSelect = array();
 $movieUpdate = array();
 $errorList = array();
-//premiere methode
+
+//recupérer les infos de la DB "category"
+
+//recupérer les infos de la DB "movie"
 if (!empty($_GET['mov_id'])) {
 	$movieId = $_GET['mov_id'];
 
 	$sql = '
-	SELECT *, cat_name
+	SELECT *
 	FROM movie
-	LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
 	WHERE mov_id = :movieId
 	';
 	$movieEdit = $pdo->prepare($sql);
 	$movieEdit->bindValue(':movieId',$movieId);
-	;
 
 	if ($movieEdit->execute()===false) {
 		print_r($movieEdit->errorInfo());
 	}
 	else {
 		$movieSelect = $movieEdit->fetch();
-
 		//print_r($movieSelect);
+	}
+
+	$sql1 = '
+	SELECT cat_id, cat_name
+	FROM category
+	';
+	$categoryEdit = $pdo->prepare($sql1);
+
+	if ($categoryEdit->execute()===false) {
+	print_r($categoryEdit->errorInfo());
+	}
+	else {
+		$catSelect = $categoryEdit->fetchAll();
+		//print_r($catSelect);
 	}
 
 	// Si le formulaire a été soumis
@@ -34,7 +49,7 @@ if (!empty($_GET['mov_id'])) {
 		// Je récupère tous les champs du formulaires
 		// si isset($_POST['mov_title']) == true alors récupère la valeur de $_POST['mov_title'], sinon, la valeur ''
 		$title = isset($_POST['mov_title']) ? $_POST['mov_title'] : '';
-		$category = isset($_POST['cat_name']) ? $_POST['cat_name'] : '';
+		$category = isset($_POST['cat_id']) ? $_POST['cat_id'] : '';
 		$cast = isset($_POST['mov_cast']) ? $_POST['mov_cast'] : '';
 		$synopsis = isset($_POST['mov_synopsis']) ? $_POST['mov_synopsis'] : '';
 		$originalTitle = isset($_POST['mov_original_title']) ? $_POST['mov_original_title'] : '';
@@ -71,7 +86,7 @@ if (!empty($_GET['mov_id'])) {
 			}
 		//}
 	}
-	else{
+	else {
 		//print_r('champ manquant')
 	}
 }
