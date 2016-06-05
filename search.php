@@ -2,30 +2,17 @@
 
 require 'inc/db.php';
 
-$sql = '
-	SELECT mov_id, mov_title, mov_cast, mov_synopsis, mov_path, mov_original_title, mov_image, cat_name, sto_name, mov_date_creation
-			FROM movie
-			LEFT OUTER JOIN category ON  category.cat_id = movie.cat_id
-			LEFT OUTER JOIN storage ON  storage.sto_id = movie.sto_id
-';
-$pdoStatement = $pdo->prepare($sql);
 
-	if($pdoStatement->execute() === false){
-		print_r($pdo->errorInfo());
-	}
-	else if($pdoStatement->rowCount() > 0){
-		$searchList2 = $pdoStatement->fetchAll();
-	}
-
+//------------------------------------------------RECHERCHE SIMPLE------------------------------------------------------------------
 
 //récupèration et vérification des données du form de l'index en GET
 if(!empty($_GET['search']) && isset($_GET['search'])){
-	$search = $_GET['search'];
+	$search = strip_tags(trim($_GET['search']));
 
 	// tableau pour récupèrer mes données
 	$searchList = array();
 
-	//Lancement requête de lecture
+	//requete pour récupèrer tous les éléments de mes tables en BD grace à mes jointures afin de donner un résultat de recherche plus fourni
 	$sqlSearchResult = '
 		SELECT mov_id, mov_title, mov_cast, mov_synopsis, mov_path, mov_original_title, mov_image, cat_name, sto_name, mov_date_creation
 		FROM movie
@@ -53,7 +40,24 @@ if(!empty($_GET['search']) && isset($_GET['search'])){
 	}
 
 }
+//-------------------------------------------------------FIN RECHERCHE SIMPLE--------------------------------------------
 
+//requete pour récupèrer tous les éléments de mes tables en BD grace à mes jointures afin de remplir les champs html de ma recherche spécifique
+$sql = '
+	SELECT mov_id, mov_title, mov_cast, mov_synopsis, mov_path, mov_original_title, mov_image, cat_name, sto_name, mov_date_creation
+			FROM movie
+			LEFT OUTER JOIN category ON  category.cat_id = movie.cat_id
+			LEFT OUTER JOIN storage ON  storage.sto_id = movie.sto_id
+';
+$pdoStatement = $pdo->prepare($sql);
+
+	if($pdoStatement->execute() === false){
+		print_r($pdo->errorInfo());
+	}
+	else if($pdoStatement->rowCount() > 0){
+		$searchList2 = $pdoStatement->fetchAll();
+	}
+//------------------------------------------------RECHERCHE SPECIFIQUE------------------------------------------------
 
 
 //récupèration et vérification des données du form de l'index en GET
@@ -64,8 +68,10 @@ $actorSearch ='';
 $stoSearch ='';
 $dateSearch ='';
 
+//si on a au moins un champs non vide après validation du formulaire, on aura un form valide et on pourra lancer une requête après vérification des GET
 if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['actorSearch']) || !empty($_GET['stoSearch']) || !empty($_GET['dateSearch'])){
 	$formTwoValid = true;
+	//print_r($_GET);
 
 	//tableau pour récupèrer mes données
 	$searchList3 = array();
@@ -78,7 +84,9 @@ if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['a
 		WHERE 1=1
 	';
 
-	//print_r($_GET);
+	//Partie la plus importante du code de recherche spécifique!!!! 
+	//A chaque fois qu'un champs est rempli et valide, on rajoute une instruction supplémentaire à notre précédente requête SQL pour encore mieux spécifier la 
+	//la recherche. Si le champs n'est pas renseigné, il ne sera pas dans la requête.
 	if(!empty($_GET['catSearch'])){
 		$catSearch = $_GET['catSearch'];
 		$sqlSearchResultAff .= ' AND cat_name = :catsearch ';
@@ -104,6 +112,7 @@ if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['a
 	//préparation de la requête et excecution
 	$stmt = $pdo->prepare($sqlSearchResultAff);
 
+	//Même principe que pour la concaténation des valeurs renseignés dans la requête sql, si un champs est valide, on fait un bind
 	if(!empty($_GET['catSearch'])){
 		$stmt->bindValue(':catsearch', $catSearch);
 	}

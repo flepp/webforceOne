@@ -1,5 +1,6 @@
+<!-- si mon formulaire spécifique est validé et est "true", dans ce cas je cache ma première recherche et grâce à ma requete j'affiche le résultat de la recherche spécifique -->
 <?php if($formTwoValid === true) : ?>
-
+	<!--  tableau d'affichage de ma recherche spécifique -->
 	<?php if(isset($searchList3) && sizeof($searchList3) > 0) : ?>
 		<table border="1">
 			<thead>
@@ -15,7 +16,8 @@
 			<tbody>
 				<?php foreach($searchList3 as $currentSearch) : ?>
 					<tr>
-						<td><a href="movie_single_view.php?mov_id=<?= $currentSearch['mov_id']?>"><?= $currentSearch['mov_title'] ?></a></td>
+						<!-- Lien vers la page movie_single.php pour renseigner l'id de mon film afin de l'afficher sur sa page unique -->
+						<td><a href="movie_single.php?mov_id=<?= $currentSearch['mov_id']?>"><?= $currentSearch['mov_title'] ?></a></td>
 						<td><?= $currentSearch['mov_original_title'] ?></td>
 						<td><?= $currentSearch['cat_name'] ?></td>
 						<td><?= $currentSearch['mov_synopsis'] ?></td>
@@ -28,6 +30,8 @@
 	<?php else :?>
 	<p>Aucun film trouvé</p>
 	<?php endif; ?>
+
+<!-- affichage dans un tableau du formulaire de recherche classique -->
 <?php else :?>
 	<?php if(!empty($_GET['search'])) ?>
 		<?php if(!isset($nbRows)) : ?>
@@ -51,7 +55,8 @@
 			<tbody>
 				<?php foreach($searchList as $currentSearch) : ?>
 					<tr>
-						<td><a href="movie_single_view.php?mov_id=<?= $currentSearch['mov_id']?>"><?= $currentSearch['mov_title'] ?></a></td>
+						<!-- Lien vers la page movie_single.php pour renseigner l'id de mon film afin de l'afficher sur sa page unique -->
+						<td><a href="movie_single.php?mov_id=<?= $currentSearch['mov_id']?>"><?= $currentSearch['mov_title'] ?></a></td>
 						<td><?= $currentSearch['mov_original_title'] ?></td>
 						<td><?= $currentSearch['cat_name'] ?></td>
 						<td><?= $currentSearch['mov_synopsis'] ?></td>
@@ -70,16 +75,17 @@
 <br/>
 <br/>
 
+<!-- formulaire de recherche spécifique -->
 <h2>Recherche spécifique</h2>
 <form method="get" action="search.php">
 	<select  name="catSearch">
 		<option value="">Genre</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
-		<option name="catSearch" value="<?= $currentSearch['cat_name'] ?>"><?= $currentSearch['cat_name'] ?></option>
+		<option value="<?= $currentSearch['cat_name'] ?>"><?= $currentSearch['cat_name'] ?></option>
 		<?php endforeach; ?>
 	</select>
-	<input type="text" name="titleSearch" placeholder="titre"></input>
-	<input type="text" name="actorSearch" placeholder="Nom de l'acteur"></input>
+	<input type="text" name="titleSearch" placeholder="titre" value="<?php if (isset($_GET['titleSearch'])){echo $_GET['titleSearch'];} ?>"></input>
+	<input type="text" name="actorSearch" placeholder="Nom de l'acteur" value="<?php if (isset($_GET['actorSearch'])){echo $_GET['actorSearch'];} ?>"></input>
 	<select name="stoSearch">
 		<option value="">Support</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
@@ -95,14 +101,3 @@
 	<button type="submit">Rechercher</button>
 
 </form>
-
-
-
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-
