@@ -16,6 +16,7 @@ if (!empty($_GET['mov_id'])) {
 	$sql = '
 	SELECT *
 	FROM movie
+	LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
 	WHERE mov_id = :movieId
 	';
 	$movieEdit = $pdo->prepare($sql);
@@ -30,7 +31,7 @@ if (!empty($_GET['mov_id'])) {
 	}
 
 	$sql1 = '
-	SELECT cat_id, cat_name
+	SELECT cat_id
 	FROM category
 	';
 	$categoryEdit = $pdo->prepare($sql1);
