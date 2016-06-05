@@ -1,5 +1,3 @@
-<p>I'm add view</p>
-
 <?= join('<br>', $errorList) ?>
 <form action="" method="post">
 	<fieldset>
@@ -10,8 +8,20 @@
 		<input type="text" name="movieSynopsis" value="" placeholder="Resumé"><br />
 		<input type="text" name="moviePath" value="" placeholder="Chemin"><br />
 		<input type="text" name="movieImg" value="" placeholder="Image"><br />
-		<input type="text" name="movieDateCr" value="" placeholder="Date création"><br />
-		<input type="text" name="movieDateUpdt" value="" placeholder="Date mise à jour"><br />
+		Support :<br />
+		<select name="storage">
+			<option value="0">choisissez :</option>
+			<?php foreach ($storageList as $key=>$value) :?>
+				<option value="<?= $key ?>"><?= $value ?></option>
+			<?php endforeach; ?>
+		</select><br />
+		Catégorie :<br />
+		<select name="category">
+			<option value="0">choisissez :</option>
+			<?php foreach ($catArray as $key=>$value) :?>
+				<option value="<?= $key ?>"><?= $value ?></option>
+			<?php endforeach; ?>
+		</select><br />
 		<button type="submit"> Ajouter </button>
 	</fieldset>
 </form>
