@@ -7,6 +7,7 @@ require 'inc/db.php';
 
 //récupèration et vérification des données du form de l'index en GET
 if(!empty($_GET['search']) && isset($_GET['search'])){
+
 	$search = strip_tags($_GET['search']);
 
 
@@ -61,6 +62,7 @@ $sql = '
 			LEFT OUTER JOIN storage ON  storage.sto_id = movie.sto_id
 ';
 $pdoStatement = $pdo->prepare($sql);
+
 
 	if($pdoStatement->execute() === false){
 		print_r($pdo->errorInfo());

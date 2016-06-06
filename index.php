@@ -17,6 +17,7 @@ if($stmt->execute() === false){
 }else{
 	$listMovie = $stmt->fetchAll();
 	//print_r($listMovie); 
+
 }
 
 // préparation de requete pour récupèrer les les noms des catégories et le nombre de film que contient une catégorie, pour cela je fais une jointure entre les tables ayant un champ en commun en l'occurence ici cat_id présent dans movie et category, je limite enfin le résulat à 4 éléments en affichage
