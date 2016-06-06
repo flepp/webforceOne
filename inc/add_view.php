@@ -11,15 +11,15 @@
 		Support :<br />
 		<select name="storage">
 			<option value="0">choisissez :</option>
-			<?php foreach ($storageList as $key=>$value) :?>
+			<?php foreach ($stoArray as $key=>$value) :?>
 				<option value="<?= $key ?>"><?= $value ?></option>
 			<?php endforeach; ?>
 		</select><br />
 		Catégorie :<br />
 		<select name="category">
 			<option value="0">choisissez :</option>
-			<?php foreach ($categoryList as $key=>$value) :?>
-				<option value="<?= $key ?>"><?= $value ?></option>
+			<?php foreach ($catArray as $key=>$value) :?>
+				<option value="<?= $key ?>"><?= $value['cat_name'] ?></option>
 			<?php endforeach; ?>
 		</select><br />
 		<button type="submit"> Ajouter </button>

@@ -60,12 +60,12 @@ if (!empty($_GET['mov_id'])) {
 			$pdoStatement->bindValue(':piath',$path);
 			$pdoStatement->bindValue(':image',$image);
 			$pdoStatement->bindValue(':mov_id',$movieId);
-			
+
 			if ($pdoStatement->execute()===false) {
 				print_r($pdoStatement->errorInfo());
 			}
 			else{
-				$movieUpdate = $pdoStatement->fetchAll();
+				$movieUpdate = $pdoStatement->fetch();
 				print_r($movieUpdate);
 			echo "Fiche du film modifiée<br />";
 			}
