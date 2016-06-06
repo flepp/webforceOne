@@ -7,7 +7,8 @@ require 'inc/db.php';
 
 //récupèration et vérification des données du form de l'index en GET
 if(!empty($_GET['search']) && isset($_GET['search'])){
-	$search = strip_tags(trim($_GET['search']));
+	$search = strip_tags($_GET['search']);
+
 
 	// tableau pour récupèrer mes données
 	$searchList = array();
@@ -38,7 +39,17 @@ if(!empty($_GET['search']) && isset($_GET['search'])){
 		//print_r($searchList);
 		$nbRows = $pdoStatement->rowCount();
 	}
+//Conservation des données saisies dans notre fichier txt
+	$handle = fopen("txt/file.txt", "a");
 
+	if ($handle) {
+		// Maintenant, je peux écrire dans mon fichier
+		fwrite($handle, $search.PHP_EOL);
+		fclose($handle);
+	}
+// je récupère le contenu de mon fichier dans un tableau
+	//$handleContent = file_get_contents($handle);
+	print_r($handle[1]);
 }
 //-------------------------------------------------------FIN RECHERCHE SIMPLE--------------------------------------------
 
@@ -137,7 +148,6 @@ if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['a
 		//print_r($searchList3);
 		//$nbRows = $stmt->rowCount();
 	}
-
 }
 
 

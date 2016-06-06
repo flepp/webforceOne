@@ -81,7 +81,7 @@
 	<select  name="catSearch">
 		<option value="">Genre</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
-		<option value="<?= $currentSearch['cat_name'] ?>"><?= $currentSearch['cat_name'] ?></option>
+		<option <?php if (($catSearch)==($currentSearch['cat_name'])) echo 'selected="selected"'; ?> value="<?= $currentSearch['cat_name'] ?>"><?= $currentSearch['cat_name'] ?></option>
 		<?php endforeach; ?>
 	</select>
 	<input type="text" name="titleSearch" placeholder="titre" value="<?php if (isset($_GET['titleSearch'])){echo $_GET['titleSearch'];} ?>"></input>
@@ -89,13 +89,13 @@
 	<select name="stoSearch">
 		<option value="">Support</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
-		<option value="<?= $currentSearch['sto_name'] ?>"><?= $currentSearch['sto_name'] ?></option>
+		<option <?php if (($stoSearch)==($currentSearch['sto_name'])) echo 'selected="selected"'; ?> value="<?= $currentSearch['sto_name'] ?>"><?= $currentSearch['sto_name'] ?></option>
 		<?php endforeach; ?>
 	</select>
 	<select name="dateSearch">
 		<option value="">Date d'ajout</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
-		<option value="<?= $currentSearch['mov_date_creation'] ?>"><?= $currentSearch['mov_date_creation'] ?></option>
+		<option <?php if (($dateSearch)==($currentSearch['mov_date_creation'])) echo 'selected="selected"'; ?> value="<?= $currentSearch['mov_date_creation'] ?>"><?= $currentSearch['mov_date_creation'] ?></option>
 		<?php endforeach; ?>
 	</select>
 	<button type="submit">Rechercher</button>

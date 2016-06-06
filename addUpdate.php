@@ -2,29 +2,37 @@
 	require 'inc/db.php';
 
 	$movieList = array();
-
-	/*$storageList = array(
-		
-		1 => 'USB'
-	);
-
-	$categoryList = array(
-		
-		1 => 'Science Fiction'
-	);*/
-
+	$stoArray = array();
 	$catArray = array();
+
+	$sqlSto = '
+
+		SELECT *
+		FROM storage
+	'
+	;
+
+	$stoStmt = $pdo->query($sqlSto);
+
+	if ($stoStmt === false) {
+
+		print_r($pdo->errorInfo());
+	}
+
+	else {
+
+		//echo 'Categories Selected';
+		$stoArray = $stoStmt->fetchAll(); //ATTENTION
+		//print_r($catArray);
+	}
 
 	$sqlCat = '
 
-		SELECT
-			cat_name
-		FROM
-			category
-		INNER JOIN
-			movie ON movie.cat_id = category.cat_id
+		SELECT *
+		FROM category
 	'
 	;
+
 
 	$catStmt = $pdo->query($sqlCat);
 
@@ -36,8 +44,8 @@
 	else {
 
 		//echo 'Categories Selected';
-		//print_r($catStmt->fetch());
-		$catArray = $catStmt->fetch();
+		$catArray = $catStmt->fetchAll(); //ATTENTION
+		//print_r($catArray);
 	}
 
 	$sql = '
@@ -66,7 +74,7 @@
 
 	if(!empty($_POST)){
 
-		print_r($_POST);
+		//print_r($_POST);
 
 		$titre = isset($_POST['movieTitle']) ? $_POST['movieTitle'] : '';
 		$titreOg = isset($_POST['movieOgTitle']) ? $_POST['movieOgTitle'] : '';
@@ -154,6 +162,7 @@
 			$pdoStatement->bindValue(':category', $category);
 
 
+			$test = array();
 
 			if($pdoStatement->execute() === false){
 
@@ -161,9 +170,10 @@
 			}
 
 			else if ($pdoStatement->rowCount() > 0){
+				$test = $pdoStatement->fetchAll();
+				//print_r($test);
 
 				echo 'Film ajouté à la base de données !';
-	
 			}
 		}
 
@@ -171,8 +181,48 @@
 
 	}
 
+//------------------------------------------------JSON///API OMDB------------------------------------
+	// &&isset($_POST['jsonMovie'])
+if(!empty($_POST['jsonMovie'])){
+	$var = strip_tags( $_POST['jsonMovie']);
+	$var2 = str_replace(' ', '+', $var);
+	$formValidJson = false;
+
+	$url = file_get_contents('http://www.omdbapi.com/?t='.$var2.'&y=&plot=short&r=json');
+	$decode = json_decode($url, true);
+	if(sizeof($decode) > 2){
+		$formValidJson = true;
+		//echo sizeof($decode);
+		//print_r($decode);
+	}else{
+		echo 'Film non trouvé';
+		$decode = Array
+(
+    ['Title'] => '',
+    ['Year'] => '',
+    ['Rated'] => '',
+    ['Released'] => '',
+    ['Runtime'] => '',
+    ['Genre'] => '',
+    ['Director'] => '',
+    ['Writer'] => '',
+    ['Actors'] => '',
+    ['Plot'] => '',
+    ['Language'] => '',
+    ['Country'] => '',
+    ['Awards'] => '',
+    ['Poster'] => '',
+    ['Metascore'] => '',
+    ['imdbRating'] => '',
+    ['imdbVotes'] => '',
+    ['imdbID'] => '',
+    ['Type'] => '',
+    ['Response'] => ''
+);
+	}
+	
+}
  	require 'inc/header.php';
- 	require 'inc/menu.php';
 	require 'inc/add_view.php';
  	require 'inc/footer.php';
-?>
+
