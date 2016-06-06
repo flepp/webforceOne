@@ -12,7 +12,7 @@
 		<select name="storage">
 			<option value="0">choisissez :</option>
 			<?php foreach ($stoArray as $key=>$value) :?>
-				<option value="<?= $key ?>"><?= $value ?></option>
+				<option value="<?= $key ?>"><?= $value['sto_name'] ?></option>
 			<?php endforeach; ?>
 		</select><br />
 		Catégorie :<br />

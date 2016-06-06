@@ -2,24 +2,14 @@
 	require 'inc/db.php';
 
 	$movieList = array();
-
-	/*$storageList = array(
-		
-		1 => 'USB'
-	);
-
-	$categoryList = array(
-
-		1 => 'Science Fiction'
-	);*/
-
 	$stoArray = array();
+	$catArray = array();
 
 	$sqlSto = '
 
-		SELECT sto_name
-		FROM movie
-		LEFT OUTER JOIN storage ON storage.sto_id = movie.sto_id
+		SELECT *
+		FROM storage
+		
 	'
 	;
 
@@ -32,14 +22,13 @@
 
 	else {
 
-		$stoArray = $stoStmt->fetch();
+		$stoArray = $stoStmt->fetchAll();
 	}
 
 	$sqlCat = '
 
-		SELECT cat_name
-		FROM movie
-		LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
+		SELECT *
+		FROM category
 	'
 	;
 
