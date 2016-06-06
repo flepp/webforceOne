@@ -12,6 +12,7 @@ table{
 td{
 
 	border: 1px solid;
+	vertical-align: middle;
 }
 
 .img-container{
