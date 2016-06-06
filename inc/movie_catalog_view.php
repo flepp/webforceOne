@@ -1,3 +1,4 @@
+
 <h1>Movie Catalog</h1>
 
 <section>
@@ -72,3 +73,4 @@
 			<a href="movie_catalog.php?page=<?=($currentPage+1) ?>">Suivant</a>
 
 </div>
+

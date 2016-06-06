@@ -1,84 +1,42 @@
 
-<?php
-	require 'inc/db.php';
+<?php  
+require 'inc/db.php';
 
-$movieSelect = array();
-$movieUpdate = array();
-$errorList = array();
-//premiere methode
-if (!empty($_GET['mov_id'])) {
-	$movieId = $_GET['mov_id'];
+$formValid = false;
+
+if(!empty($_GET['mov_id'])){
+	$myId = $_GET['mov_id'];
+	$movieList = array();
 
 	$sql = '
-	SELECT *, cat_name, sto_name
-	FROM movie
-	LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
-	LEFT OUTER JOIN storage ON storage.sto_id = movie.sto_id
-	WHERE mov_id = :movieId
+
+		SELECT mov_id, mov_title, mov_cast, mov_synopsis, mov_path, mov_original_title, mov_image, cat_name, sto_name, mov_date_creation, mov_cast
+		FROM movie
+		LEFT OUTER JOIN category ON  category.cat_id = movie.cat_id
+		LEFT OUTER JOIN storage ON  storage.sto_id = movie.sto_id
+		WHERE mov_id = :movID
+
 	';
-	$movieEdit = $pdo->prepare($sql);
-	$movieEdit->bindValue(':movieId',$movieId);
-	;
 
-	if ($movieEdit->execute()===false) {
-		print_r($movieEdit->errorInfo());
-	}
-	else {
-		$movieSelect = $movieEdit->fetch();
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindValue(':movID', $myId, PDO::PARAM_INT);
 
-		//print_r($movieSelect);
-	}
-
-	// Si le formulaire a été soumis
-	if (!empty($_POST)) {
-		//print_r($_POST);
-		// Je récupère tous les champs du formulaires
-		// si isset($_POST['mov_title']) == true alors récupère la valeur de $_POST['mov_title'], sinon, la valeur ''
-		$title = isset($_POST['mov_title']) ? $_POST['mov_title'] : '';
-		$category = isset($_POST['cat_name']) ? $_POST['cat_name'] : '';
-		$cast = isset($_POST['mov_cast']) ? $_POST['mov_cast'] : '';
-		$synopsis = isset($_POST['mov_synopsis']) ? $_POST['mov_synopsis'] : '';
-		$originalTitle = isset($_POST['mov_original_title']) ? $_POST['mov_original_title'] : '';
-		$path = isset($_POST['mov_path']) ? $_POST['mov_path'] : '';
-		$image = isset($_POST['mov_image']) ? $_POST['mov_image'] : '';
-
-		//if (empty($errorList)) {
-			//echo 'je peux modifier la DB<br />';
-
-			//écrire la requête préparée "UPDATE" qui va modifier la fiche du film dans le tableau $movie[0], dans la base de données.
-
-			$sql = "
-				UPDATE movie
-				SET mov_title=:title, cat_id=:category, mov_cast=:cast, mov_synopsis=:synopsis, mov_original_title=:originalTitle, mov_path=:piath, mov_image=:image
-				WHERE mov_id = :mov_id
-				";
-			$pdoStatement = $pdo->prepare ($sql);
-			$pdoStatement->bindValue(':title',$title);
-			$pdoStatement->bindValue(':category',$category);
-			$pdoStatement->bindValue(':cast',$cast);
-			$pdoStatement->bindValue(':synopsis',$synopsis);
-			$pdoStatement->bindValue(':originalTitle',$originalTitle);
-			$pdoStatement->bindValue(':piath',$path);
-			$pdoStatement->bindValue(':image',$image);
-			$pdoStatement->bindValue(':mov_id',$movieId);
-
-			if ($pdoStatement->execute()===false) {
-				print_r($pdoStatement->errorInfo());
-			}
-			else{
-				$movieUpdate = $pdoStatement->fetchAll();
-				print_r($movieUpdate);
-			echo "Fiche du film modifiée<br />";
-			}
-		//}
+	if($stmt->execute() === false){
+		print_r($stmt->errorInfo());
 	}
 	else{
-		//print_r('champ manquant')
+		if($stmt->rowCount() > 0){
+			$movieList = $stmt->fetch();
+			$formValid = true;
+			//print_r($movieList);
+		}
+		else{
+			echo "Ce film n'existe pas dans notre Base de Données!";
+		}
 	}
+
 }
 
 require 'inc/header.php';
-require 'inc/menu.php';
 require 'inc/movie_single_view.php';
 require 'inc/footer.php';
-?>
