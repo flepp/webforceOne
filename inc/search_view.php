@@ -81,6 +81,7 @@
 	<select  name="catSearch">
 		<option value="">Genre</option>
 		<?php foreach($searchList2 as $currentSearch) : ?>
+
 		<option <?php if (($catSearch)==($currentSearch['cat_name'])) echo 'selected="selected"'; ?> value="<?= $currentSearch['cat_name'] ?>"><?= $currentSearch['cat_name'] ?></option>
 		<?php endforeach; ?>
 	</select>

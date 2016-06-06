@@ -2,9 +2,11 @@
 <?php
 require 'inc/db.php';
 
+
 $movieSelect = array();
 $movieUpdate = array();
 $errorList = array();
+
 $stoList = array();
 $catList = array();
 
@@ -33,10 +35,12 @@ if ($stmtSto->execute()) {
 }
 
 //recupérer les infos de la DB "movie"
+
 if (!empty($_GET['mov_id'])) {
 	$movieId = $_GET['mov_id'];
 
 	$sql = '
+
 	SELECT *, category.cat_id, cat_name, storage.sto_id, sto_name
 	FROM movie
 	LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
@@ -107,3 +111,4 @@ else {
 require 'inc/header.php';
 require 'inc/update_view.php';
 require 'inc/footer.php';
+

@@ -1,5 +1,3 @@
-
-
 <form action="" method="post">
 	<fieldset>
 		<legend>Modifier les infos du film</legend>
