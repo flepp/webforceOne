@@ -9,26 +9,43 @@
 	);
 
 	$categoryList = array(
-		
+
 		1 => 'Science Fiction'
 	);*/
 
-	$catArray = array();
+	$stoArray = array();
+
+	$sqlSto = '
+
+		SELECT sto_name
+		FROM movie
+		LEFT OUTER JOIN storage ON storage.sto_id = movie.sto_id
+	'
+	;
+
+	$stoStmt = $pdo->query($sqlSto);
+
+	if ($stoStmt->execute() === false) {
+
+		print_r($pdo->errorInfo());
+	}
+
+	else {
+
+		$stoArray = $stoStmt->fetch();
+	}
 
 	$sqlCat = '
 
-		SELECT
-			cat_name
-		FROM
-			category
-		INNER JOIN
-			movie ON movie.cat_id = category.cat_id
+		SELECT cat_name
+		FROM movie
+		LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
 	'
 	;
 
 	$catStmt = $pdo->query($sqlCat);
 
-	if ($catStmt === false) {
+	if ($catStmt->execute() === false) {
 
 		print_r($pdo->errorInfo());
 	}
@@ -37,7 +54,7 @@
 
 		//echo 'Categories Selected';
 		//print_r($catStmt->fetch());
-		$catArray = $catStmt->fetch();
+		$catArray = $catStmt->fetchAll();
 	}
 
 	$sql = '

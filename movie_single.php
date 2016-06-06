@@ -10,9 +10,10 @@ if (!empty($_GET['mov_id'])) {
 	$movieId = $_GET['mov_id'];
 
 	$sql = '
-	SELECT *, cat_name
+	SELECT *, cat_name, sto_name
 	FROM movie
 	LEFT OUTER JOIN category ON category.cat_id = movie.cat_id
+	LEFT OUTER JOIN storage ON storage.sto_id = movie.sto_id
 	WHERE mov_id = :movieId
 	';
 	$movieEdit = $pdo->prepare($sql);
@@ -60,7 +61,7 @@ if (!empty($_GET['mov_id'])) {
 			$pdoStatement->bindValue(':piath',$path);
 			$pdoStatement->bindValue(':image',$image);
 			$pdoStatement->bindValue(':mov_id',$movieId);
-			
+
 			if ($pdoStatement->execute()===false) {
 				print_r($pdoStatement->errorInfo());
 			}

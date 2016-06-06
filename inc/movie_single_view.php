@@ -1,29 +1,35 @@
-<form action="" method="">
+<form action="" method="post">
 	<fieldset>
 		<legend>Infos du film</legend>
+
 		<img height="240px" width="180px" src="<?= $movieSelect['mov_image']?>">
 		<h2>
-			<?= $movieSelect['mov_title'] ?>
+			Titre : <?= $movieSelect['mov_title'] ?>
 		</h2>
 		<br />
 		<h3>
-			<?= $movieSelect['mov_original_title'] ?>
+			Titre original : <?= $movieSelect['mov_original_title'] ?>
 		</h3>
 		<br />
+
 		<div>
-			<?= $movieSelect['cat_name'] ?>
+			Genre : <?= $movieSelect['cat_name'] ?>
 		</div>
 		<br />
 		<div>
-			<?= $movieSelect['mov_cast'] ?>
+			Acteurs : <?= $movieSelect['mov_cast'] ?>
 		</div>
 		<br />
 		<div>
-			<?= $movieSelect['mov_synopsis'] ?>
+			Descritption : <?= $movieSelect['mov_synopsis'] ?>
 		</div>
 		<br />
 		<div>
-			<?= $movieSelect['mov_path'] ?>
+			Chemin : <?= $movieSelect['mov_path'] ?>
+		</div>
+		<br>
+		<div>
+			Support de stockage : <?= $movieSelect['sto_name'] ?>
 		</div>
 		<br />
 	</fieldset>

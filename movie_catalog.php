@@ -16,7 +16,7 @@
 
 
 	$sql = '
-			SELECT 
+			SELECT
 			mov_id,
 			mov_title,
 			mov_original_title,
@@ -25,8 +25,8 @@
 			mov_path,
 			mov_image,
 			mov_date_creation,
-			mov_date_update 	
-		FROM 
+			mov_date_update
+		FROM
 			movie
 		LEFT OUTER JOIN
 			category ON category.cat_id = movie.cat_id

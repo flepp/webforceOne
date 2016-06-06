@@ -29,9 +29,9 @@
 					</tr>
 					<tr>
 						<td>
-							<h3> 
-								<?= '#'.$value['mov_id'].' '.$value['mov_title']?> 
-							</h3> 
+							<h3>
+								<?= '#'.$value['mov_id'].' '.$value['mov_title']?>
+							</h3>
 						</td>
 					</tr>
 					<tr>
@@ -49,12 +49,20 @@
 					</tr>
 				</table>
 			</td>
+			<td>
+				<form action="delete.php" method="post">
+					<input type="text" hidden value="<?= $value['mov_id'] ?>" name="movie">
+					<button type="submit">Supprimer</button>
+				</form>
+			</td>
 		</tr>
+
 	<?php endforeach ?>
 	</table>
+
 	<?php
-			
-		if($currentPage !== 1) { 
+
+		if($currentPage !== 1) {
 
 	?>
 			<a href="movie_catalog.php?page=<?=($currentPage-1) ?>">Précedent</a>
@@ -63,5 +71,4 @@
 
 			<a href="movie_catalog.php?page=<?=($currentPage+1) ?>">Suivant</a>
 
-		
 </div>
