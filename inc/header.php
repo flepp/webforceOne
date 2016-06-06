@@ -1,9 +1,11 @@
-<?php 
+<!DOCTYPE html>
+<head>
+	<title>Projet WebForceOne</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+</head>
+<body>
 
-	try {
-		$dsn = 'mysql:dbname=DBB;host=localhost;';
-		$pdo = new PDO($dsn, 'pseudo', 'pass');
-	} catch (Exception $e) {
-		echo 'Error: ' $e->getmessage();
-	}
- ?>
+
