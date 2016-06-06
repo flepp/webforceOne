@@ -13,7 +13,7 @@
 
 <form action="" method="post">
 	<fieldset>
-		<input type="text" name="cat_id" value="<?= $currentId; ?>"/><br />
+		<input type="hidden" name="cat_id" value="<?= $currentId; ?>"/><br />
 		<table>
 			<tr>
 				<td>Nom catégorie:</td>
