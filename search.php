@@ -55,6 +55,8 @@ if(!empty($_GET['search']) && isset($_GET['search'])){
 //-------------------------------------------------------FIN RECHERCHE SIMPLE--------------------------------------------
 
 //requete pour récupèrer tous les éléments de mes tables en BD grace à mes jointures afin de remplir les champs html de ma recherche spécifique
+$searchList2 = array();
+
 $sql = '
 	SELECT mov_id, mov_title, mov_cast, mov_synopsis, mov_path, mov_original_title, mov_image, cat_name, sto_name, mov_date_creation
 			FROM movie

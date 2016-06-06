@@ -9,12 +9,12 @@
 <form action="" method="post">
 	<fieldset>
 		<legend>Ajout de Film</legend>
-		<input type="text" name="movieTitle" value="<?= $decode['Title'] ?>" placeholder="Titre"><br />
-		<input type="text" name="movieOgTitle" value="<?= $decode['Title'] ?>" placeholder="Titre original"><br />
-		<input type="text" name="movieCast" value="<?= $decode['Actors'] ?>" placeholder="Cast"><br />
-		<input type="text" name="movieSynopsis" value="<?= $decode['Plot'] ?>" placeholder="Resumé"><br />
+		<input type="text" name="movieTitle" value="<?php if(isset($decode['Title'])){echo $decode['Title'];} ?>" placeholder="Titre"><br />
+		<input type="text" name="movieOgTitle" value="<?php if(isset($decode['Title'])){echo $decode['Title'];} ?>" placeholder="Titre original"><br />
+		<input type="text" name="movieCast" value="<?php if(isset($decode['Actors'])){echo $decode['Actors'];} ?>" placeholder="Cast"><br />
+		<input type="text" name="movieSynopsis" value="<?php if(isset($decode['Plot'])){echo $decode['Plot'];} ?>" placeholder="Resumé"><br />
 		<input type="text" name="moviePath" value="" placeholder="Chemin"><br />
-		<input type="text" name="movieImg" value="<?= $decode['Poster'] ?>" placeholder="Image"><br />
+		<input type="text" name="movieImg" value="<?php if(isset($decode['Poster'])){echo $decode['Poster'];} ?>" placeholder="Image"><br />
 		Support :<br />
 		<select name="storage">
 			<option value="0">choisissez :</option>

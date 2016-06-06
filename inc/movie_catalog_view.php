@@ -1,7 +1,7 @@
 
-<h1>Movie Catalog</h1>
 
-<section>
+<section class="container">
+<h1>Movie Catalog</h1>
 	<form action="" method="get">
 		<fieldset>
 			<span>Tri par date</span>
