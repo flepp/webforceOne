@@ -6,10 +6,11 @@
 		<input type="text" name="mov_title" value="<?= $movieSelect['mov_title'] ?>"/><br />
 
 		<input type="text" name="cat_id" value="<?= $movieSelect['cat_name']?>"/>
+
 		Confirmer ou modifier la catégorie :
 		<select name="cat_id">
 		    <?php foreach ($catSelect as $value) :?>
-		    <option value=<?= $value['cat_id']?>">
+		    <option value="<?= $value['cat_id']?>" <?php if ($_POST['cat_id'] == $value['cat_id']) {echo 'selected';}?>>
 		    <?= $value['cat_name']?>
 		    </option>
 		    <?php endforeach; ?>
