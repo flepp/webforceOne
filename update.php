@@ -109,6 +109,7 @@ else {
 }
 
 require 'inc/header.php';
+require 'inc/menu.php';
 require 'inc/update_view.php';
 require 'inc/footer.php';
 

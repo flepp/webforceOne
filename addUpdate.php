@@ -224,6 +224,7 @@ if(!empty($_POST['jsonMovie'])){
 	
 }
  	require 'inc/header.php';
+ 	require 'inc/menu.php';
 	require 'inc/add_view.php';
  	require 'inc/footer.php';
 

@@ -154,5 +154,6 @@ if(!empty($_GET['catSearch']) || !empty($_GET['titleSearch']) || !empty($_GET['a
 
 
 require 'inc/header.php';
+require 'inc/menu.php';
 require 'inc/search_view.php';
 require 'inc/footer.php';

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 	require 'inc/db.php';
@@ -62,7 +61,7 @@
 			$movieList = $pdoStatement->fetchAll();
 		}
 
-/*$catalogList = array();
+$catalogList = array();
 
 if(!empty($_GET['cat_id'])){
 	$catID = $_GET['cat_id'];
@@ -72,7 +71,7 @@ if(!empty($_GET['cat_id'])){
 		LEFT OUTER JOIN category ON  category.cat_id = movie.cat_id
 		LEFT OUTER JOIN storage ON  storage.sto_id = movie.sto_id
 		WHERE category.cat_id = :catId
-	';*/
+	';
 
 $pdoStatement = $pdo->prepare($sql);
 $pdoStatement->bindValue(':catId', $catID);
@@ -90,5 +89,6 @@ $pdoStatement->bindValue(':catId', $catID);
 
 
 require 'inc/header.php';
+require 'inc/menu.php';
 require 'inc/movie_catalog_view.php';
 require 'inc/footer.php';

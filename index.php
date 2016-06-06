@@ -1,7 +1,6 @@
 <?php 
 
 require 'inc/db.php';
-require 'inc/header.php';
 
 //initialisation de mon tableau pour y stocker une liste de mes derniers films entrés en BD d'où ORDER BY mov_date_creation DESC et une limite de 5 éléments
 //ce tableau aura pour utilité de remplir les champs img et a dans ma div imgLink
@@ -71,4 +70,8 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div>
 <?php endforeach; ?>
 
-<?php require 'inc/footer.php'; ?>
+<?php 
+	require 'inc/header.php';
+	require 'inc/menu.php';
+	require 'inc/footer.php'; 
+?>

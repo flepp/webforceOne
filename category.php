@@ -66,5 +66,6 @@ if ($formValid == true) {
 
 
 require 'inc/header.php';
+require 'inc/menu.php';
 require 'inc/category_view.php';
 require 'inc/footer.php';

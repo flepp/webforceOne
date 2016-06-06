@@ -38,5 +38,6 @@ if(!empty($_GET['mov_id'])){
 }
 
 require 'inc/header.php';
+require 'inc/menu.php';
 require 'inc/movie_single_view.php';
 require 'inc/footer.php';
