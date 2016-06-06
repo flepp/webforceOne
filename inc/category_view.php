@@ -1,3 +1,4 @@
+
 <h1>Gestion des catégories</h1>
 <!-- Menu deroulant des categories -->
 <form action="" method="get">
@@ -13,7 +14,7 @@
 
 <form action="" method="post">
 	<fieldset>
-		<input type="text" name="cat_id" value="<?= $currentId; ?>"/><br />
+		<input type="hidden" name="cat_id" value="<?= $currentId; ?>"/><br />
 		<table>
 			<tr>
 				<td>Nom catégorie:</td>
