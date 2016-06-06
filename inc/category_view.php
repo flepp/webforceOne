@@ -1,14 +1,27 @@
-<h1>Voici la liste de toutes les catégories</h1>
 
-<?php foreach($catList as $key => $value) : ?>
-	<p><a href="movie_catalog.php?cat_id=<?= $value['cat_id'] ?>"><?=$value['cat_name'] ?></a></p>
-<?php  endforeach; ?>
-
-<br/>
-<br/>
-<br/>
-
-<h2>Ajouter une catégorie</h2>
-<form method="post" action="">
-	<input type="text" name="catPost" placeholder="Nouveau genre"></input>
+<h1>Gestion des catégories</h1>
+<!-- Menu deroulant des categories -->
+<form action="" method="get">
+	<select name="cat_id">
+		<option value="0">ajout d'une catégorie</option>
+		<!-- Je fais le remplissage du menu deroulant -->
+		<?php foreach ($allCategoriesList as $currentCategory) : ?>
+		<option value="<?= $currentCategory['cat_id']; ?>"<?= $currentId == $currentCategory['cat_id']?>><?= $currentCategory['cat_name']; ?></option>
+		<?php endforeach; ?>
+	</select>
+	<input type="submit" value="OK"/>
 </form>
+
+<form action="" method="post">
+	<fieldset>
+		<input type="text" name="cat_id" value="<?= $currentId; ?>"/><br />
+		<table>
+			<tr>
+				<td>Nom catégorie:</td>
+				<td><input type="text" name="cat_name" value="<?= $categoryName; ?>"/></td>
+			</tr>
+		</table>
+		<button type="submit">Valider</button>
+	</fieldset>
+</form>
+

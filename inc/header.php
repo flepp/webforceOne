@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>WEBFORCE ONE</title>
-	<link rel="stylesheet" href="./css/styles.css">
+	<title>Projet WebForceOne</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 <body>
 
