@@ -1,3 +1,4 @@
+
 <?php
 // Je me connecte à la BD webforceone_sql1
 require 'inc/db.php';
@@ -91,3 +92,4 @@ require 'inc/menu.php';
 require 'inc/category_view.php';
 require 'inc/footer.php';
 ?>
+

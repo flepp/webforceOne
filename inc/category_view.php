@@ -1,3 +1,4 @@
+
 <h1>Gestion des catégories</h1>
 <!-- Menu deroulant des categories -->
 <form action="" method="get">
